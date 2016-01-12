@@ -75,9 +75,10 @@ func (m GearmanPlugin) parseStatus(conn io.Reader) (map[string]interface{}, erro
 		}
 
 		res := strings.Split(s, "\t")
-		status["gearman.status."+res[0]+".total"] = res[1]
-		status["gearman.status."+res[0]+".running"] = res[2]
-		status["gearman.status."+res[0]+".available_workers"] = res[3]
+		metric_name := strings.Replace(res[0], ".", "_", -1)
+		status["gearman.status."+metric_name+".total"] = res[1]
+		status["gearman.status."+metric_name+".running"] = res[2]
+		status["gearman.status."+metric_name+".available_workers"] = res[3]
 	}
 
 	if err := scanner.Err(); err != nil {

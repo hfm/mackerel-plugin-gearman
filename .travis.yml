@@ -1,0 +1,21 @@
+language: go
+go:
+- 1.5.2
+- tip
+env: PATH=/home/travis/gopath/bin:$PATH
+install: go get github.com/mitchellh/gox
+script: make test
+after_success:
+- echo "packaging by ${TRAVIS_GO_VERSION}"
+- make package
+deploy:
+  provider: releases
+  api_key:
+    secure: LLYZzhfh2y7U1LTYM4tnrdHwzbG4edw6xYi1zkp0Ec3YK4cFtN5Q3cmrIxeY47daXvcme582vDJBQDgQkB6cxJLndMzJe0M3Lar7ej0nqumR8RILZUV8D+6/RKUfJuCjLr/EO5raVMqpyH7uJzTqrhHWt+HbAIYjbM42AJgIWpUCuMcLKX5WrlVeyCV1Et8aNiTg3zLgR7BkIJGIM5h0tsw0k+0xpzXhXAbNNH1xnBtgcncrAMdR5sNbp3QOS4PZzPrMSNeao6nBb3wB6u3KDGigk0adO1ZLhp0IHOVWL/9ubusF30nyCgC/9TC74lrlkr8p8V+0T2lDKZectkUgt1tDalYmW84f/Fee+SeCyxX5sO1C8puiiDY8oAd3vrdKtMMzR5dORIhhH5d5tv9H6qDdqdB7gXxSKfM5oRxTFZFEKiSAeYyiG+Jogf0AX5KXkrRKWSa6o1/vV+6lMeuQs79XL4gSAB9WDHkhn0AEf6BzShlTI1sfjO8XUIuQCDl5DKcNiYAbaogel77w5mbvGG6LKyclKJCbo1oaSLB4jD6fWTnalqdhAncwEIAT9ZSdypttXwund00qs/BlDhz0AifRxIkwIk16xtbDqw445dvHJ8lWHmQ+HbSH4J9ifcXJ/OZJI2THqtaMTOfUUZOXEcxCPKb9FHXtFTchjhvdvIY=
+  file: "pkg/dist/*/*"
+  file_glob: true
+  skip_cleanup: true
+  on:
+    repo: hfm/mackerel-plugin-gearman
+    condition: $TRAVIS_GO_VERSION = 1.5.2
+    tags: true

@@ -23,10 +23,10 @@ beyond_function	3	2	18
 .
 `
 
-	gearmanStats := bytes.NewBufferString(stub)
+	gearmanStatus := bytes.NewBufferString(stub)
 
-	stats, err := gearman.parseStatus(gearmanStats)
-	fmt.Println(stats)
+	status, err := gearman.parseStatus(gearmanStatus)
+	fmt.Println(status)
 	if err != nil {
 		t.Errorf("%v", err)
 	}

@@ -1,3 +1,7 @@
+## 0.1.1 (2016-01-14)
+
+Built by go 1.5.3
+
 ## 0.1.0 (2016-01-11)
 
 Although Gearman allows a function name to include dots(.) character, custom metrics name cannot contain dots, so it replaces dots with underscores(\_).
